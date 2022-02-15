@@ -39,10 +39,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions {
+        // Ensures incremental builds remain fast
+        preDexLibraries true
+        // Required to build with Reader SDK
+        jumboMode true
+        // Required to build with Reader SDK
+        keepRuntimeAnnotatedClasses false
+    }
 }
 
 repositories {
     google()
+    maven {
+        url "https://sdk.squareup.com/android"
+        credentials {
+            username SQUARE_READER_SDK_APPLICATION_ID
+            password SQUARE_READER_SDK_REPOSITORY_PASSWORD
+        }
+    }
     mavenCentral()
     jcenter()
 }
